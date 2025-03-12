@@ -437,31 +437,13 @@ const ClipPathGenerator: React.FC = () => {
             
             {shapeType === "polygon" && (
               <div className="animate-slide-up opacity-0" style={{ animationFillMode: 'forwards', animationDelay: '0.1s' }}>
-                <div className="flex justify-between items-center mb-4">
-                  <p className="text-sm text-muted-foreground">
-                    Polygon with {polygonPoints.length} points. Adjust each point's coordinates.
-                  </p>
-                  <button 
-                    onClick={addPolygonPoint}
-                    className="text-xs flex items-center bg-secondary hover:bg-secondary/80 text-secondary-foreground py-1 px-2 rounded-md transition-colors"
-                  >
-                    <Plus className="mr-1 h-3 w-3" />
-                    Add Point
-                  </button>
-                </div>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Adjust the coordinates for each point of the triangle.
+                </p>
                 
                 {polygonPoints.map((point, index) => (
                   <div key={index} className="mb-4 p-3 bg-gray-50 rounded-lg">
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="font-medium text-sm">Point {index + 1}</div>
-                      <button 
-                        onClick={() => removePolygonPoint(index)}
-                        className="text-xs flex items-center text-destructive hover:text-destructive/80 transition-colors"
-                        aria-label="Remove point"
-                      >
-                        <Trash2 className="h-3 w-3" />
-                      </button>
-                    </div>
+                    <div className="font-medium text-sm mb-2">Point {index + 1}</div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <div className="control-label">
