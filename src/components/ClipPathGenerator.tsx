@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect, useRef } from "react";
-import { Copy, Check, RefreshCw, Square } from "lucide-react";
+import React, { useState, useEffect, useRef, ChangeEvent } from "react";
+import { Copy, Check, RefreshCw, Square, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 type ShapeType = "ellipse" | "polygon" | "circle" | "inset";
@@ -72,6 +72,11 @@ const ClipPathGenerator: React.FC = () => {
   
   // Code string
   const [clipPathCode, setClipPathCode] = useState("");
+
+  // Custom content state
+  const [customContentType, setCustomContentType] = useState<"color" | "image" | "upload">("color");
+  const [customImage, setCustomImage] = useState<string>("https://images.unsplash.com/photo-1649972904349-6e44c42644a7?auto=format&fit=crop&w=800&h=800");
+  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
   
   // Preview area ref for getting dimensions
   const previewRef = useRef<HTMLDivElement>(null);
@@ -120,6 +125,25 @@ const ClipPathGenerator: React.FC = () => {
       position: "bottom-center",
       duration: 2000,
     });
+  };
+
+  // Handle file upload
+  const handleFileUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        setUploadedImage(event.target.result as string);
+        setCustomContentType("upload");
+        toast("Image uploaded successfully", {
+          position: "bottom-center",
+          duration: 2000,
+        });
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
   // Generate clip-path string
@@ -174,9 +198,12 @@ const ClipPathGenerator: React.FC = () => {
           <div className="flex-1 flex items-center justify-center p-4 bg-gray-50 rounded-xl relative">
             <div 
               ref={previewRef}
-              className="w-full aspect-square max-w-xs relative group animate-float"
+              className="w-full aspect-square max-w-xs relative group"
               style={{ 
-                backgroundColor: bgColor,
+                backgroundColor: customContentType === "color" ? bgColor : "transparent",
+                backgroundImage: customContentType !== "color" ? `url(${customContentType === "upload" ? uploadedImage : customImage})` : "none",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
                 clipPath: clipPathCode 
               }}
             >
@@ -189,27 +216,68 @@ const ClipPathGenerator: React.FC = () => {
               <code>clip-path: {clipPathCode};</code>
             </div>
             
-            <div className="flex justify-between mt-4">
-              <button 
-                className="inline-flex items-center justify-center text-sm py-2 px-4 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors"
-                onClick={randomizeColor}
-              >
-                <RefreshCw className="mr-2 h-4 w-4" />
-                Change Color
-              </button>
+            <div className="flex flex-wrap justify-between mt-4 gap-2">
+              <div className="flex gap-2">
+                <button 
+                  className={`inline-flex items-center justify-center text-xs py-2 px-3 rounded-full transition-colors ${
+                    customContentType === "color" 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                  onClick={() => setCustomContentType("color")}
+                >
+                  Color
+                </button>
+                <button 
+                  className={`inline-flex items-center justify-center text-xs py-2 px-3 rounded-full transition-colors ${
+                    customContentType === "image" 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                  onClick={() => setCustomContentType("image")}
+                >
+                  Sample Image
+                </button>
+                <label 
+                  className={`inline-flex items-center justify-center text-xs py-2 px-3 rounded-full transition-colors cursor-pointer ${
+                    customContentType === "upload" 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                  }`}
+                >
+                  <Upload className="mr-1 h-3 w-3" />
+                  Upload
+                  <input 
+                    type="file" 
+                    accept="image/*" 
+                    className="sr-only" 
+                    onChange={handleFileUpload} 
+                  />
+                </label>
+              </div>
+              
+              {customContentType === "color" && (
+                <button 
+                  className="inline-flex items-center justify-center text-xs py-2 px-3 bg-secondary text-secondary-foreground rounded-full hover:bg-secondary/80 transition-colors"
+                  onClick={randomizeColor}
+                >
+                  <RefreshCw className="mr-1 h-3 w-3" />
+                  Change Color
+                </button>
+              )}
               
               <button 
-                className="copy-button"
+                className="copy-button text-xs py-2 px-3"
                 onClick={copyToClipboard}
               >
                 {copied ? (
                   <>
-                    <Check className="mr-2 h-4 w-4" />
+                    <Check className="mr-1 h-3 w-3" />
                     Copied
                   </>
                 ) : (
                   <>
-                    <Copy className="mr-2 h-4 w-4" />
+                    <Copy className="mr-1 h-3 w-3" />
                     Copy CSS
                   </>
                 )}
