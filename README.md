@@ -2,7 +2,7 @@
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/d2a9e4ff-dc69-4b9e-b4ff-af613fd287f5
+**URL**: [https://lovable.dev/projects/d2a9e4ff-dc69-4b9e-b4ff-af613fd287f5](https://clip-path-canvas.lovable.app/)****
 
 ## How can I edit this code?
 
