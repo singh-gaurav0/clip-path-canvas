@@ -1,20 +1,60 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clip Path Generator</title>
-    <meta name="description" content="An elegant clip-path CSS generator with live preview" />
+    
+    <!-- Primary Meta Tags -->
+    <title>Clip Path Generator – CSS Shape Maker</title>
+    <meta name="description" content="An elegant clip-path CSS generator with live preview. Create custom shapes for your website with ease and copy the CSS instantly!" />
+    <meta name="keywords" content="CSS clip-path, CSS generator, shape maker, web design, frontend tools, CSS editor" />
     <meta name="author" content="Lovable" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Clip Path Generator – CSS Shape Maker" />
+    <meta property="og:description" content="An elegant clip-path CSS generator with live preview. Create custom shapes for your website with ease and copy the CSS instantly!" />
     <meta property="og:image" content="/og-image.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta property="og:url" content="https://yourwebsite.com" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Clip Path Generator – CSS Shape Maker" />
+    <meta name="twitter:description" content="Create custom CSS clip-path shapes with live preview and instant CSS export!" />
+    <meta name="twitter:image" content="/og-image.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Preload Fonts for Performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" as="style" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" />
+
+    <!-- Preconnect for Faster Load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured Data for SEO (JSON-LD) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Clip Path Generator",
+        "url": "https://yourwebsite.com",
+        "image": "https://yourwebsite.com/og-image.png",
+        "description": "An elegant clip-path CSS generator with live preview. Create custom shapes for your website with ease and copy the CSS instantly!",
+        "author": {
+          "@type": "Person",
+          "name": "Gaurav"
+        }
+      }
+    </script>
   </head>
 
   <body>
     <div id="root"></div>
+
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
     <script type="module" src="/src/main.tsx"></script>
