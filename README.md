@@ -3,7 +3,7 @@
 ## Project info
 
 
-[url](https://clip-path-canvas.lovable.app/)](https://clip-path-canvas.lovable.app/)
+[url]https://clip-path-generator.vercel.app/
 
 # What technologies are used for this project?
 
